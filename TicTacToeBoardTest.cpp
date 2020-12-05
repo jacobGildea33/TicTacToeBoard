@@ -14,9 +14,77 @@ class TicTacToeBoardTest : public ::testing::Test
 		virtual void TearDown(){} //clean up after each test, (before destructor) 
 };
 
-/* EXAMPLE TEST FORMAT
-TEST(TicTacToeBoardTest, unitTestName)
+TEST(TicTacToeBoardTest, is_valid_space)
 {
-	ASSERT_TRUE(true);
+	TicTacToeBoard obj;
+    Piece actual = obj.placePiece(2,2);
+    ASSERT_TRUE(actual == X);
 }
-*/
+TEST(TicTacToeBoardTest, is_invalid_space)
+{
+	TicTacToeBoard obj;
+    Piece actual = obj.placePiece(3,4);
+    ASSERT_FALSE(actual == Invalid);
+}
+
+TEST(TicTacToeBoardTest, isWinner)
+{
+	TicTacToeBoard obj;
+	obj.placePiece(1,1);
+	obj.placePiece(2,1);
+	obj.placePiece(1,2);
+	obj.placePiece(2,2);
+	obj.placePiece(1,3);
+    Piece actual = obj.getWinner();
+    ASSERT_TRUE(actual == X);
+}
+TEST(TicTacToeBoardTest, cats_game)
+ {
+	TicTacToeBoard obj;
+	obj.placePiece(1,1);
+	obj.placePiece(1,2);
+	obj.placePiece(2,2);
+	obj.placePiece(3,1);
+	obj.placePiece(3,2);
+	obj.placePiece(1,2);
+	obj.placePiece(1,3);
+	obj.placePiece(3,3);
+	obj.placePiece(2,3);
+
+    Piece actual = obj.getWinner();
+    ASSERT_TRUE(actual == Invalid);
+}
+
+TEST(TicTacToeBoardTest, long_game)_invalid_placement
+ {
+	TicTacToeBoard obj;
+	obj.placePiece(1,1);	
+	obj.placePiece(1,2); 
+	obj.placePiece(2,2);		
+	obj.placePiece(3,1); 
+	obj.placePiece(3,2);  
+	obj.placePiece(1,2); 
+	obj.placePiece(1,3); 
+	obj.placePiece(3,3); 
+	obj.placePiece(3,4); 
+
+    Piece actual = obj.getWinner();
+    ASSERT_TRUE(actual == Invalid);
+}
+
+TEST(TicTacToeBoardTest, long_game_winner)
+ {
+	TicTacToeBoard obj;
+	obj.placePiece(1,1);
+	obj.placePiece(1,2);
+	obj.placePiece(2,2);
+	obj.placePiece(3,1);
+	obj.placePiece(3,2); 
+	obj.placePiece(1,2);
+	obj.placePiece(1,3);
+	obj.placePiece(2,3);
+	obj.placePiece(3,3);
+
+    Piece actual = obj.getWinner();
+    ASSERT_TRUE(actual == X);
+}

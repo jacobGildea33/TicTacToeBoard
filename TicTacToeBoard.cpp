@@ -19,7 +19,17 @@ TicTacToeBoard::TicTacToeBoard()
 **/
 Piece TicTacToeBoard::toggleTurn()
 {
-  return Invalid;
+  int turnCount = 0;
+
+  if (turnCount % 2 = 0){
+    turn = X;
+  } else{
+    turn = O
+  }
+  if(turnCount > 9){
+    turn = Invalid;
+  }
+  return turn;
 }
 
 /**
@@ -33,7 +43,23 @@ Piece TicTacToeBoard::toggleTurn()
 **/ 
 Piece TicTacToeBoard::placePiece(int row, int column)
 {
-  return Invalid;
+  Piece result;
+  
+  if(row > 3 || column > 3){
+    result = Invalid;
+  }
+
+  while(!gameOver){
+    for(int c = 0; c<BOARDSIZE; c++{
+      for(int r = 0; r<BOARDSIZE; r++){
+        if(c = column && r = row){
+          board[c][r] = turn;
+          result = trun;
+        }
+      }
+    })
+  }
+  return result;
 }
 
 /**
@@ -42,7 +68,17 @@ Piece TicTacToeBoard::placePiece(int row, int column)
 **/
 Piece TicTacToeBoard::getPiece(int row, int column)
 {
-  return Invalid;
+  if(row > 3 || column > 3){
+    return Invalid;
+  }
+  
+  for(int c = 0; c<BOARDSIZE; c++){
+    for(int r = 0; r<BOARDSIZE; r++){
+      if (c == column && r == row){
+        return board[c][r];
+      }
+    }
+  }
 }
 
 /**
@@ -51,5 +87,49 @@ Piece TicTacToeBoard::getPiece(int row, int column)
 **/
 Piece TicTacToeBoard::getWinner()
 {
-  return Invalid;
+  Piece temp;
+  Piece result;
+  int Xr = 0;
+  int Xc = 0;
+  int Or = 0;
+  int Oc = 0;
+
+  for(int c = 0; c<BOARDSIZE; c++){
+    for(int r = 0; r<BOARDSIZE; r++){
+      temp = board[c][r].getPiece();
+      
+      if(temp == x){
+        Xr++;
+      }
+      if(temp == O){
+        Or++;
+      }
+    }
+    if(Xr == 3){
+      result = X;
+    } else if(Or == 3){
+      result = O;
+    } else if (Xr >= 1){
+      Xc++;
+    } else if(Or >= 1){
+      Oc++;
+    }
+  }
+  if(Xc == 3){
+    result = X;
+  }
+  if (Oc == 3){
+    result = O;
+  }
+  if(temp == blank){
+    return temp;
+  }
+  
+  temp = board[2][2].getPiece()
+
+  if((board[1][1].getPiece == temp && board[3][3] == temp) || (board[3][1].getPiece == temp && board[1][3] == temp)){
+    result = temp;
+  }
+
+  return result;
 }
